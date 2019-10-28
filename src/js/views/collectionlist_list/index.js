@@ -74,6 +74,9 @@ class CollectionListView extends Component {
   };
 
   render() {
+    const collections = this.props.apiState.data.collections
+      ? this.props.apiState.data.collections
+      : [];
     return (
       <Container>
         <ButtonContainer>
@@ -84,6 +87,9 @@ class CollectionListView extends Component {
             color="red"
             onClick={this.newCollection}
           />
+          {collections.length === 0 && (
+            <h2>Você ainda não criou nenhuma coleção.</h2>
+          )}
           {this.getCollectionButtons()}
         </ButtonContainer>
       </Container>

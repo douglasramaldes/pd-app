@@ -129,6 +129,9 @@ class AlbumListView extends Component {
           placeholder="Digite o nome do disco..."
         />
         <ButtonContainer>
+          {albums.length === 0 && (
+            <h2>Você ainda não adicionou nenhum disco.</h2>
+          )}
           {albums &&
             albums.map((item, index) => {
               const { album, artist, artwork, id } = item;

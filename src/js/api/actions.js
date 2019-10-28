@@ -1,4 +1,6 @@
 import { Api } from "../toolbox";
+import { store } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 
 export const createDisco = (album, albums) => {
   return dispatch => {
@@ -9,8 +11,26 @@ export const createDisco = (album, albums) => {
           type: "CREATE_ALBUM",
           albums
         });
+        store.addNotification({
+          title: "Disco Criado",
+          message: "O Disco foi criado com sucesso",
+          type: "default", // 'default', 'success', 'info', 'warning'
+          container: "bottom-right", // where to position the notifications
+          dismiss: {
+            duration: 3000
+          }
+        });
       })
       .catch(error => {
+        store.addNotification({
+          title: "Disco Não foi Salvo",
+          message: "Tente adicionar o disco novamente",
+          type: "warning", // 'default', 'success', 'info', 'warning'
+          container: "bottom-right", // where to position the notifications
+          dismiss: {
+            duration: 3000
+          }
+        });
         console.log(error);
       });
   };
@@ -25,8 +45,26 @@ export const editDisco = (disco, discoId) => {
           disco,
           discoId
         });
+        store.addNotification({
+          title: "Disco Editado",
+          message: "O Disco foi editado com sucesso",
+          type: "success", // 'default', 'success', 'info', 'warning'
+          container: "bottom-right", // where to position the notifications
+          dismiss: {
+            duration: 3000
+          }
+        });
       })
       .catch(error => {
+        store.addNotification({
+          title: "Não conseguimos editar o disco",
+          message: "Tente editar o disco novamente",
+          type: "warning", // 'default', 'success', 'info', 'warning'
+          container: "bottom-right", // where to position the notifications
+          dismiss: {
+            duration: 3000
+          }
+        });
         console.log(error);
       });
   };
@@ -111,8 +149,26 @@ export const createCollection = (collection, collections) => {
           type: "CREATE_COLLECTION",
           collections
         });
+        store.addNotification({
+          title: "Coleção Criada",
+          message: "A coleção foi criada com sucesso",
+          type: "success", // 'default', 'success', 'info', 'warning'
+          container: "bottom-right", // where to position the notifications
+          dismiss: {
+            duration: 3000
+          }
+        });
       })
       .catch(error => {
+        store.addNotification({
+          title: "Não conseguimos criar a coleção",
+          message: "Tente criar a coleção novamente",
+          type: "warning", // 'default', 'success', 'info', 'warning'
+          container: "bottom-right", // where to position the notifications
+          dismiss: {
+            duration: 3000
+          }
+        });
         console.log(error);
       });
   };
@@ -121,8 +177,40 @@ export const createCollection = (collection, collections) => {
 export const addToCollection = discoCollection => {
   return dispatch => {
     return Api.createDiscoCollection(discoCollection)
-      .then(res => {})
+      .then(res => {
+        store.addNotification({
+          title: "Disco Adicionado ",
+          message: "O Disco foi adicionado na coleção com sucesso",
+          type: "success", // 'default', 'success', 'info', 'warning'
+          container: "bottom-right", // where to position the notifications
+          dismiss: {
+            duration: 3000
+          }
+        });
+      })
       .catch(error => {
+        if (error === "disco is already in the collection") {
+          store.addNotification({
+            title: "Disco Duplicado",
+            message: "Esse Disco já encontra-se na coleção",
+            type: "warning", // 'default', 'success', 'info', 'warning'
+            container: "bottom-right", // where to position the notifications
+            dismiss: {
+              duration: 3000
+            }
+          });
+        }
+        if (error !== "disco is already in the collection") {
+          store.addNotification({
+            title: "Não conseguimos adicionar o disco",
+            message: "Tente adicionar o disco novamente",
+            type: "warning", // 'default', 'success', 'info', 'warning'
+            container: "bottom-right", // where to position the notifications
+            dismiss: {
+              duration: 3000
+            }
+          });
+        }
         console.log(error);
       });
   };
@@ -136,8 +224,26 @@ export const removeFromCollection = discoCollection => {
           type: "FETCH_DISCOS_COLLECTION",
           discosCollection: res
         });
+        store.addNotification({
+          title: "Disco Removido ",
+          message: "O Disco foi removido da coleção com sucesso",
+          type: "success", // 'default', 'success', 'info', 'warning'
+          container: "bottom-right", // where to position the notifications
+          dismiss: {
+            duration: 3000
+          }
+        });
       })
       .catch(error => {
+        store.addNotification({
+          title: "Não conseguimos remover o Disco",
+          message: "Tente remover o disco novamente",
+          type: "warning", // 'default', 'success', 'info', 'warning'
+          container: "bottom-right", // where to position the notifications
+          dismiss: {
+            duration: 3000
+          }
+        });
         console.log(error);
       });
   };
@@ -151,8 +257,26 @@ export const removeAllDiscosCollection = discoCollectionId => {
           type: "FETCH_DISCOS_COLLECTION",
           discosCollection: []
         });
+        store.addNotification({
+          title: "Todos os discos Foram Removidos ",
+          message: "Removemos os discos com sucesso",
+          type: "success", // 'default', 'success', 'info', 'warning'
+          container: "bottom-right", // where to position the notifications
+          dismiss: {
+            duration: 3000
+          }
+        });
       })
       .catch(error => {
+        store.addNotification({
+          title: "Não conseguimos remover os Discos",
+          message: "Tente remover os discos novamente",
+          type: "warning", // 'default', 'success', 'info', 'warning'
+          container: "bottom-right", // where to position the notifications
+          dismiss: {
+            duration: 3000
+          }
+        });
         console.log(error);
       });
   };

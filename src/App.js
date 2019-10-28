@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import DiscoJS from "./js";
 import { injectGlobal } from "styled-components";
+import ReactNotifications from "react-notifications-component";
 
 injectGlobal`
    body {
@@ -13,6 +14,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <ReactNotifications />
         <DiscoJS />
       </div>
     );

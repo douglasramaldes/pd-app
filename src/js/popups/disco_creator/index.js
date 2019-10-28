@@ -5,6 +5,8 @@ import { constants, FileInput } from "../../toolbox";
 import { fetchCollections, createDisco } from "../../api/actions";
 import { pushView, popPopup } from "../../views/actions";
 import Header from "../components/header";
+// import { store } from "react-notifications-component";
+// import "react-notifications-component/dist/theme.css";
 
 const { color, animation } = constants;
 const { slideInFromBottom, slideOutToBottom } = animation;
