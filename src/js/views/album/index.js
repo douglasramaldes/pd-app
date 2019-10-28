@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { fetchAlbums, fetchAlbum, addToCollection } from "../../api/actions";
 import { pushView, pushPopup } from "../actions";
 import { Button, constants, Modal } from "../../toolbox";
+import { Buffer } from "buffer";
 
 const { color } = constants;
 const breakpointSm = `@media screen and (max-width: 750px)`;
@@ -203,8 +204,7 @@ class AlbumView extends Component {
     const { isLoaded } = this.state;
     const disco = albumData[album];
     const artwork = disco ? disco[0] && disco[0].artwork : null;
-    const url = "";
-
+    const url = artwork ? new Buffer(artwork) : null;
     return (
       <Container>
         <MobileHeader>
